@@ -5,5 +5,4 @@ WORKDIR /app
 COPY target/*.jar app.jar
 
 EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-cp", "app.jar", "com.devops.App"]
