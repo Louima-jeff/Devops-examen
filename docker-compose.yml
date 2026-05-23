@@ -4,10 +4,35 @@ services:
   app:
     build: .
     container_name: microservicio-container
+
     restart: always
 
     environment:
       APP_ENV: production
+      JAVA_OPTS: "-Xms256m -Xmx512m"
 
     ports:
       - "8080:8080"
+
+    volumes:
+      - app-data:/data
+
+    networks:
+      - devops-network
+
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+volumes:
+  app-data:
+
+networks:
+  devops-network:
+    driver: bridge
